@@ -8,7 +8,7 @@ from pathlib import Path
 import torch
 
 # constants for special tokens
-PAD_TOKEN = "<pad>" 
+PAD_TOKEN = "<pad>"
 UNK_TOKEN = "<unk>"
 CLS_TOKEN = "<cls>"
 
@@ -26,10 +26,10 @@ class WordTokenizer:
             CLS_TOKEN: 2,
         }
         self.id_to_token = {
-            token_id: token
-            for token, token_id in self.token_to_id.items()
+            token_id: token for token, token_id in self.token_to_id.items()
         }
-# properties for special token IDs and vocabulary size
+
+    # properties for special token IDs and vocabulary size
     @property
     def pad_id(self) -> int:
         return self.token_to_id[PAD_TOKEN]
@@ -45,10 +45,11 @@ class WordTokenizer:
     @property
     def vocab_size(self) -> int:
         return len(self.token_to_id)
-# this function normalizes the input text by converting it to lowercase
-# removing non-alphanumeric characters (except for '%')
-# and collapsing multiple spaces into a single space
-# tt returns the normalized text as a string
+
+    # this function normalizes the input text by converting it to lowercase
+    # removing non-alphanumeric characters (except for '%')
+    # and collapsing multiple spaces into a single space
+    # tt returns the normalized text as a string
     def normalize(self, text: str) -> str:
         text = text.lower().strip()
         text = re.sub(r"[^a-z0-9%]+", " ", text)
@@ -59,36 +60,30 @@ class WordTokenizer:
         return normalized.split() if normalized else []
 
     def fit(self, texts: list[str], min_frequency: int = 1) -> None:
-        counts = Counter(
-            token
-            for text in texts
-            for token in self.tokenize(text)
-        )
+        counts = Counter(token for text in texts for token in self.tokenize(text))
 
         vocabulary = sorted(
             token
             for token, count in counts.items()
-            if count >= min_frequency
-            and token not in self.token_to_id
+            if count >= min_frequency and token not in self.token_to_id
         )
-# this function builds the vocabulary 
-# by counting the frequency of tokens in the provided texts
+        # this function builds the vocabulary
+        # by counting the frequency of tokens in the provided texts
         self.token_to_id = {
             PAD_TOKEN: 0,
             UNK_TOKEN: 1,
             CLS_TOKEN: 2,
-            **{
-                token: index + 3
-                for index, token in enumerate(vocabulary)
-            },
+            **{token: index + 3 for index, token in enumerate(vocabulary)},
         }
         self.id_to_token = {
-            token_id: token
-            for token, token_id in self.token_to_id.items()
+            token_id: token for token, token_id in self.token_to_id.items()
         }
-# encode function takes a string input and returns a tuple of two tensors:
-# 1. token_ids tensor: contains the token IDs corresponding to the tokens in the input
-# 2. attention_mask tensor: indicates which tokens are actual tokens (1) & which are padding (0)
+
+    # encode function takes a string input and returns a tuple of two tensors:
+    # 1. token_ids tensor: c
+    # ontains the token IDs corresponding to the tokens in the input
+    # 2. attention_mask tensor:
+    # indicates which tokens are actual tokens (1) & which are padding (0)
     def encode(self, text: str) -> tuple[torch.Tensor, torch.Tensor]:
         tokens = [CLS_TOKEN, *self.tokenize(text)]
         token_ids = [
@@ -106,13 +101,11 @@ class WordTokenizer:
             torch.tensor(token_ids, dtype=torch.long),
             torch.tensor(attention_mask, dtype=torch.bool),
         )
-# decode function takes a list of token IDs 
-# then returns the corresponding tokens as a list of strings
+
+    # decode function takes a list of token IDs
+    # then returns the corresponding tokens as a list of strings
     def decode(self, token_ids: list[int]) -> list[str]:
-        return [
-            self.id_to_token.get(token_id, UNK_TOKEN)
-            for token_id in token_ids
-        ]
+        return [self.id_to_token.get(token_id, UNK_TOKEN) for token_id in token_ids]
 
     def save(self, path: str | Path) -> None:
         destination = Path(path)
@@ -128,7 +121,7 @@ class WordTokenizer:
         )
 
     @classmethod
-    def load(cls, path: str | Path) -> "WordTokenizer":
+    def load(cls, path: str | Path) -> WordTokenizer:
         payload = json.loads(Path(path).read_text(encoding="utf-8"))
         return cls(
             token_to_id={

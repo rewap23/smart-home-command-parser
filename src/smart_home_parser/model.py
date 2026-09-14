@@ -8,10 +8,12 @@ from torch import nn
 from smart_home_parser.dataset import LABEL_FIELDS
 
 # implementing transformer model for smart home command parsing
-# what this does is it takes in a sequence of token IDs and attention masks as input
-# then it outputs a dictionary of logits for each label field 
+# what this does is it takes in a sequence of token IDs
+# and attention masks as input
+# then it outputs a dictionary of logits for each label field
 # logits are raw scores for each of the classes, not probabilities
 # label fields : (intent, action, device, location, value, unit)
+
 
 @dataclass(frozen=True)
 class ModelConfig:
@@ -21,7 +23,7 @@ class ModelConfig:
     embedding_dim: int = 128
     num_heads: int = 4
     num_layers: int = 3
-    feedforward_dim: int = 256 
+    feedforward_dim: int = 256
     # feedforward dimension in the transformer encoder layer
     dropout: float = 0.1
 
@@ -81,14 +83,17 @@ class SmartHomeTransformer(nn.Module):
                 f"max_length {self.config.max_length}."
             )
 
-        positions = torch.arange(
-            sequence_length,
-            device=input_ids.device,
-        ).unsqueeze(0).expand(batch_size, sequence_length)
+        positions = (
+            torch.arange(
+                sequence_length,
+                device=input_ids.device,
+            )
+            .unsqueeze(0)
+            .expand(batch_size, sequence_length)
+        )
 
-        hidden_states = (
-            self.token_embedding(input_ids)
-            + self.position_embedding(positions)
+        hidden_states = self.token_embedding(input_ids) + self.position_embedding(
+            positions
         )
         hidden_states = self.embedding_norm(hidden_states)
         hidden_states = self.embedding_dropout(hidden_states)
@@ -102,10 +107,7 @@ class SmartHomeTransformer(nn.Module):
 
         cls_embedding = encoded[:, 0, :]
 
-        return {
-            field: head(cls_embedding)
-            for field, head in self.heads.items()
-        }
+        return {field: head(cls_embedding) for field, head in self.heads.items()}
 
     def config_dict(self) -> dict[str, object]:
         return asdict(self.config)

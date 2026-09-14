@@ -6,7 +6,7 @@ import json
 import random
 from pathlib import Path
 
-from smart_home_parser.ontology import CommandLabels, NONE, is_valid_command
+from smart_home_parser.ontology import NONE, CommandLabels, is_valid_command
 
 # seed the random number generator for reproducibility
 SEED = 42
@@ -334,26 +334,26 @@ def generate_examples() -> list[dict[str, object]]:
     )
     add(
         SPEAKER_PLAY_TEMPLATES,
-            CommandLabels("device_control", "play", "speaker", "unknown"),
-            "speaker_play",
-            {"location": LOCATIONS},
+        CommandLabels("device_control", "play", "speaker", "unknown"),
+        "speaker_play",
+        {"location": LOCATIONS},
     )
     add(
         SPEAKER_PAUSE_TEMPLATES,
-            CommandLabels("device_control", "pause", "speaker", "unknown"),
-            "speaker_pause",
-            {"location": LOCATIONS},
+        CommandLabels("device_control", "pause", "speaker", "unknown"),
+        "speaker_pause",
+        {"location": LOCATIONS},
     )
     add(
         VOLUME_TEMPLATES,
         CommandLabels(
-                "device_control",
-                "set_volume",
-                "speaker",
-                "unknown",
-                unit="percent",
+            "device_control",
+            "set_volume",
+            "speaker",
+            "unknown",
+            unit="percent",
         ),
-            "speaker_volume",
+        "speaker_volume",
         {
             "location": LOCATIONS,
             "value": [str(value) for value in range(10, 101, 10)],
@@ -423,6 +423,7 @@ def main() -> None:
             file.write(json.dumps(record) + "\n")
 
     print(f"Wrote {len(examples)} examples to {output_path}")
+
 
 if __name__ == "__main__":
     main()

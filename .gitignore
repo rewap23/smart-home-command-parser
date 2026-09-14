@@ -38,3 +38,20 @@ artifacts/*
 .DS_Store
 .vscode/
 .idea/
+
+# Generated dataset files
+data/raw/*.jsonl
+data/processed/*.jsonl
+
+# Large model binaries
+artifacts/**/*.pt
+artifacts/**/*.pth
+artifacts/**/*.onnx
+
+# Keep reproducibility artifacts
+!artifacts/**/metadata.json
+!artifacts/**/metrics.json
+!artifacts/**/training_history.json
+!artifacts/**/vocab.json
+!artifacts/**/label_encoders.json
+!artifacts/**/model.pt.sha256

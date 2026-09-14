@@ -36,10 +36,7 @@ def move_batch_to_device(
     batch: dict[str, torch.Tensor],
     device: torch.device,
 ) -> dict[str, torch.Tensor]:
-    return {
-        name: tensor.to(device)
-        for name, tensor in batch.items()
-    }
+    return {name: tensor.to(device) for name, tensor in batch.items()}
 
 
 def calculate_loss(
@@ -47,10 +44,7 @@ def calculate_loss(
     batch: dict[str, torch.Tensor],
     criterion: nn.CrossEntropyLoss,
 ) -> torch.Tensor:
-    losses = [
-        criterion(logits[field], batch[field])
-        for field in LABEL_FIELDS
-    ]
+    losses = [criterion(logits[field], batch[field]) for field in LABEL_FIELDS]
     return torch.stack(losses).mean()
 
 
@@ -80,10 +74,7 @@ def evaluate(
         total_loss += loss.item() * batch_size
         total_examples += batch_size
 
-        predictions = {
-            field: logits[field].argmax(dim=1)
-            for field in LABEL_FIELDS
-        }
+        predictions = {field: logits[field].argmax(dim=1) for field in LABEL_FIELDS}
 
         exact_match_mask = torch.ones(
             batch_size,
@@ -151,16 +142,12 @@ def main() -> None:
     set_seed(args.seed)
 
     if args.device == "auto":
-        device = torch.device(
-            "cuda" if torch.cuda.is_available() else "cpu"
-        )
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     else:
         device = torch.device(args.device)
 
     if device.type == "cuda" and not torch.cuda.is_available():
-        raise RuntimeError(
-            "CUDA was requested but no CUDA-enabled GPU is available."
-        )
+        raise RuntimeError("CUDA was requested but no CUDA-enabled GPU is available.")
 
     args.artifact_dir.mkdir(parents=True, exist_ok=True)
 
@@ -168,9 +155,7 @@ def main() -> None:
     validation_records = load_records(args.validation_path)
 
     tokenizer = WordTokenizer(max_length=args.max_length)
-    tokenizer.fit(
-        [str(record["command"]) for record in train_records]
-    )
+    tokenizer.fit([str(record["command"]) for record in train_records])
 
     label_encoders = LabelEncoders.fit(train_records)
 
@@ -206,8 +191,7 @@ def main() -> None:
         vocab_size=tokenizer.vocab_size,
         max_length=args.max_length,
         num_classes={
-            field: label_encoders.num_classes(field)
-            for field in LABEL_FIELDS
+            field: label_encoders.num_classes(field) for field in LABEL_FIELDS
         },
         embedding_dim=args.embedding_dim,
         num_heads=args.num_heads,
@@ -266,9 +250,7 @@ def main() -> None:
             running_loss += loss.item() * batch_size
             processed += batch_size
 
-            progress.set_postfix(
-                train_loss=f"{running_loss / processed:.4f}"
-            )
+            progress.set_postfix(train_loss=f"{running_loss / processed:.4f}")
 
         validation_metrics = evaluate(
             model,
@@ -318,10 +300,7 @@ def main() -> None:
         "train_examples": len(train_dataset),
         "validation_examples": len(validation_dataset),
         "vocab_size": tokenizer.vocab_size,
-        "model_parameters": sum(
-            parameter.numel()
-            for parameter in model.parameters()
-        ),
+        "model_parameters": sum(parameter.numel() for parameter in model.parameters()),
         "best_validation_loss": best_validation_loss,
         "best_epoch": min(
             history,

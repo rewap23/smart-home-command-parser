@@ -1,5 +1,3 @@
-import json
-
 from torch.utils.data import DataLoader
 
 from smart_home_parser.dataset import (

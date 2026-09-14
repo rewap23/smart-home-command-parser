@@ -1,4 +1,4 @@
-from smart_home_parser.ontology import CommandLabels, NONE, is_valid_command
+from smart_home_parser.ontology import NONE, CommandLabels, is_valid_command
 
 
 def test_light_brightness_command_is_valid() -> None:
@@ -24,6 +24,7 @@ def test_invalid_device_action_pair_is_rejected() -> None:
 
     assert is_valid_command(labels) is False
 
+
 # initial values for thermostat temperature setting command
 def test_temperature_requires_fahrenheit_value() -> None:
     labels = CommandLabels(
@@ -47,11 +48,14 @@ def test_unsupported_command_requires_empty_device_fields() -> None:
     )
 
     assert is_valid_command(labels) is True
-    assert is_valid_command(
-        CommandLabels(
-            intent="unsupported",
-            action="turn_on",
-            device=NONE,
-            location=NONE,
+    assert (
+        is_valid_command(
+            CommandLabels(
+                intent="unsupported",
+                action="turn_on",
+                device=NONE,
+                location=NONE,
+            )
         )
-    ) is False
+        is False
+    )

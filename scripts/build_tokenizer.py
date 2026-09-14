@@ -34,10 +34,7 @@ def main() -> None:
     tokenizer.fit(texts, min_frequency=args.min_frequency)
     tokenizer.save(args.output_path)
 
-    print(
-        f"Saved vocabulary with {tokenizer.vocab_size} tokens "
-        f"to {args.output_path}"
-    )
+    print(f"Saved vocabulary with {tokenizer.vocab_size} tokens to {args.output_path}")
 
 
 if __name__ == "__main__":

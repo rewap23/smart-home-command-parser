@@ -24,6 +24,7 @@ LABEL_FIELDS = (
 # constants for special label values
 Record = dict[str, Any]
 
+
 # properties for special label values
 @dataclass(frozen=True)
 class LabelEncoders:
@@ -31,26 +32,15 @@ class LabelEncoders:
     field_to_label: dict[str, dict[int, str]]
 
     @classmethod
-    def fit(cls, records: list[Record]) -> "LabelEncoders":
+    def fit(cls, records: list[Record]) -> LabelEncoders:
         field_to_id: dict[str, dict[str, int]] = {}
 
         for field in LABEL_FIELDS:
-            labels = sorted(
-                {
-                    str(record["labels"][field])
-                    for record in records
-                }
-            )
-            field_to_id[field] = {
-                label: index
-                for index, label in enumerate(labels)
-            }
+            labels = sorted({str(record["labels"][field]) for record in records})
+            field_to_id[field] = {label: index for index, label in enumerate(labels)}
 
         field_to_label = {
-            field: {
-                index: label
-                for label, index in mapping.items()
-            }
+            field: {index: label for label, index in mapping.items()}
             for field, mapping in field_to_id.items()
         }
 
@@ -78,21 +68,15 @@ class LabelEncoders:
         )
 
     @classmethod
-    def load(cls, path: str | Path) -> "LabelEncoders":
+    def load(cls, path: str | Path) -> LabelEncoders:
         field_to_id = json.loads(Path(path).read_text(encoding="utf-8"))
         field_to_id = {
-            field: {
-                str(label): int(label_id)
-                for label, label_id in mapping.items()
-            }
+            field: {str(label): int(label_id) for label, label_id in mapping.items()}
             for field, mapping in field_to_id.items()
         }
 
         field_to_label = {
-            field: {
-                label_id: label
-                for label, label_id in mapping.items()
-            }
+            field: {label_id: label for label, label_id in mapping.items()}
             for field, mapping in field_to_id.items()
         }
 
@@ -105,11 +89,7 @@ class LabelEncoders:
 def load_records(path: str | Path) -> list[Record]:
     source = Path(path)
     with source.open(encoding="utf-8") as file:
-        return [
-            json.loads(line)
-            for line in file
-            if line.strip()
-        ]
+        return [json.loads(line) for line in file if line.strip()]
 
 
 class SmartHomeCommandDataset(Dataset[dict[str, torch.Tensor]]):
@@ -128,9 +108,7 @@ class SmartHomeCommandDataset(Dataset[dict[str, torch.Tensor]]):
 
     def __getitem__(self, index: int) -> dict[str, torch.Tensor]:
         record = self.records[index]
-        input_ids, attention_mask = self.tokenizer.encode(
-            str(record["command"])
-        )
+        input_ids, attention_mask = self.tokenizer.encode(str(record["command"]))
         labels = record["labels"]
 
         item = {
@@ -153,12 +131,7 @@ class SmartHomeCommandDataset(Dataset[dict[str, torch.Tensor]]):
 def summarize_records(records: list[Record]) -> dict[str, dict[str, int]]:
     return {
         field: dict(
-            sorted(
-                Counter(
-                    str(record["labels"][field])
-                    for record in records
-                ).items()
-            )
+            sorted(Counter(str(record["labels"][field]) for record in records).items())
         )
         for field in LABEL_FIELDS
     }

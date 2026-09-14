@@ -3,20 +3,20 @@ from dataclasses import dataclass
 NONE = "none"
 
 INTENT = [
-    'device_control',
-    'unsupported',
+    "device_control",
+    "unsupported",
 ]
 
 ACTIONS = [
-    'turn_on',
-    'turn_off',
-    'set_temperature',
-    'open',
-    'close',
-    'set_volume',
-    'play',
-    'pause',
-    'lock',
+    "turn_on",
+    "turn_off",
+    "set_temperature",
+    "open",
+    "close",
+    "set_volume",
+    "play",
+    "pause",
+    "lock",
 ]
 
 DEVICES = [
@@ -49,7 +49,7 @@ UNITS = [
 
 VALUE_CLASSES = [
     NONE,
-    *[str(value) for value in range(0, 101)], # percent values from 0 to 100
+    *[str(value) for value in range(0, 101)],  # percent values from 0 to 100
 ]
 
 LABEL_FIELDS = (
@@ -61,6 +61,7 @@ LABEL_FIELDS = (
     "unit",
 )
 
+
 @dataclass(frozen=True)
 class CommandLabels:
     intent: str
@@ -69,6 +70,7 @@ class CommandLabels:
     location: str
     value: str = NONE
     unit: str = NONE
+
 
 VALID_ACTIONS_BY_DEVICE = {
     "light": {"turn_on", "turn_off", "set_brightness"},

@@ -19,9 +19,7 @@ def test_special_tokens_have_stable_ids() -> None:
 def test_normalization() -> None:
     tokenizer = WordTokenizer()
 
-    assert tokenizer.tokenize(
-        "  Please, TURN on the Kitchen lights!!! "
-    ) == [
+    assert tokenizer.tokenize("  Please, TURN on the Kitchen lights!!! ") == [
         "please",
         "turn",
         "on",
@@ -40,9 +38,7 @@ def test_fit_and_encode_shape() -> None:
         ]
     )
 
-    input_ids, attention_mask = tokenizer.encode(
-        "turn on the kitchen lights"
-    )
+    input_ids, attention_mask = tokenizer.encode("turn on the kitchen lights")
 
     assert input_ids.shape == (8,)
     assert attention_mask.shape == (8,)

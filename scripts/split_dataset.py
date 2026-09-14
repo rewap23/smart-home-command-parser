@@ -49,9 +49,7 @@ def main() -> None:
     # Reserve one record for every label value in every split. This is
     # especially important for numeric values, which are predicted as classes.
     for field in fields:
-        values = {
-            str(record["labels"][field]) for record in records
-        }
+        values = {str(record["labels"][field]) for record in records}
         for value in sorted(values):
             for split_name in split_names:
                 candidates = [
@@ -70,20 +68,17 @@ def main() -> None:
                 split_records[split_name].append(records[index])
 
     remaining_records = [
-        record for index, record in enumerate(records)
-        if index not in reserved_indexes
+        record for index, record in enumerate(records) if index not in reserved_indexes
     ]
     random.shuffle(remaining_records)
 
     train_count = round(len(records) * 0.70) - len(split_records["train"])
     validation_count = round(len(records) * 0.15)
     split_records["train"].extend(remaining_records[:train_count])
-    split_records["validation"].extend(remaining_records[
-        train_count : train_count + validation_count
-    ])
-    split_records["test"].extend(
-        remaining_records[train_count + validation_count :]
+    split_records["validation"].extend(
+        remaining_records[train_count : train_count + validation_count]
     )
+    split_records["test"].extend(remaining_records[train_count + validation_count :])
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     for split_name, split in split_records.items():
@@ -98,23 +93,15 @@ def main() -> None:
         "splits": {
             split_name: {
                 "examples": len(split),
-                "template_count": len(
-                    {str(record["template_id"]) for record in split}
-                ),
+                "template_count": len({str(record["template_id"]) for record in split}),
                 "intent_counts": dict(
                     sorted(
-                        Counter(
-                            record["labels"]["intent"]
-                            for record in split
-                        ).items()
+                        Counter(record["labels"]["intent"] for record in split).items()
                     )
                 ),
                 "action_counts": dict(
                     sorted(
-                        Counter(
-                            record["labels"]["action"]
-                            for record in split
-                        ).items()
+                        Counter(record["labels"]["action"] for record in split).items()
                     )
                 ),
             }

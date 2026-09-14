@@ -1,0 +1,50 @@
+{"id":"challenge-001","command":"Could you make it brighter where I'm cooking?","labels":{"intent":"device_control","action":"set_brightness","device":"light","location":"kitchen","value":"none","unit":"none"}}
+{"id":"challenge-002","command":"Kill the lamps upstairs.","labels":{"intent":"device_control","action":"turn_off","device":"light","location":"bedroom","value":"none","unit":"none"}}
+{"id":"challenge-003","command":"I'm freezing in here—make the bedroom 74.","labels":{"intent":"device_control","action":"set_temperature","device":"thermostat","location":"bedroom","value":"74","unit":"fahrenheit"}}
+{"id":"challenge-004","command":"Put the lounge lights at half power.","labels":{"intent":"device_control","action":"set_brightness","device":"light","location":"living_room","value":"50","unit":"percent"}}
+{"id":"challenge-005","command":"Quiet the office music down to 20%.","labels":{"intent":"device_control","action":"set_volume","device":"speaker","location":"office","value":"20","unit":"percent"}}
+{"id":"challenge-006","command":"Can you play something in the kitchen?","labels":{"intent":"device_control","action":"play","device":"speaker","location":"kitchen","value":"none","unit":"none"}}
+{"id":"challenge-007","command":"Pause whatever is playing in my room.","labels":{"intent":"device_control","action":"pause","device":"speaker","location":"bedroom","value":"none","unit":"none"}}
+{"id":"challenge-008","command":"Make the garage cooler to 65.","labels":{"intent":"device_control","action":"set_temperature","device":"thermostat","location":"garage","value":"65","unit":"fahrenheit"}}
+{"id":"challenge-009","command":"Would you close the shades in the office?","labels":{"intent":"device_control","action":"close","device":"blinds","location":"office","value":"none","unit":"none"}}
+{"id":"challenge-010","command":"Let sunlight into the bathroom.","labels":{"intent":"device_control","action":"open","device":"blinds","location":"bathroom","value":"none","unit":"none"}}
+{"id":"challenge-011","command":"Make the fan go.","labels":{"intent":"device_control","action":"turn_on","device":"fan","location":"unknown","value":"none","unit":"none"}}
+{"id":"challenge-012","command":"Stop the fan in the garage.","labels":{"intent":"device_control","action":"turn_off","device":"fan","location":"garage","value":"none","unit":"none"}}
+{"id":"challenge-013","command":"Secure the entrance.","labels":{"intent":"device_control","action":"lock","device":"door_lock","location":"front_door","value":"none","unit":"none"}}
+{"id":"challenge-014","command":"What's the weather tomorrow?","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-015","command":"Send Jordan a text saying I'll be late.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-016","command":"Remind me to call my mom at six.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-017","command":"Order pizza for dinner.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-018","command":"Play the kitchen lights.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-019","command":"Turn the front door up to 80 percent.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-020","command":"Set the refrigerator to seventy degrees.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-021","command":"Please switch on the living room lamps.","labels":{"intent":"device_control","action":"turn_on","device":"light","location":"living_room","value":"none","unit":"none"}}
+{"id":"challenge-022","command":"Turn off the bathroom lighting.","labels":{"intent":"device_control","action":"turn_off","device":"light","location":"bathroom","value":"none","unit":"none"}}
+{"id":"challenge-023","command":"Bring the office lighting down to 30 percent.","labels":{"intent":"device_control","action":"set_brightness","device":"light","location":"office","value":"30","unit":"percent"}}
+{"id":"challenge-024","command":"Raise the bedroom brightness to 70 percent.","labels":{"intent":"device_control","action":"set_brightness","device":"light","location":"bedroom","value":"70","unit":"percent"}}
+{"id":"challenge-025","command":"Adjust the kitchen AC to seventy two degrees.","labels":{"intent":"device_control","action":"set_temperature","device":"thermostat","location":"kitchen","value":"72","unit":"fahrenheit"}}
+{"id":"challenge-026","command":"Warm the garage to 78 degrees.","labels":{"intent":"device_control","action":"set_temperature","device":"thermostat","location":"garage","value":"78","unit":"fahrenheit"}}
+{"id":"challenge-027","command":"Start the office fan.","labels":{"intent":"device_control","action":"turn_on","device":"fan","location":"office","value":"none","unit":"none"}}
+{"id":"challenge-028","command":"Switch off the kitchen fan.","labels":{"intent":"device_control","action":"turn_off","device":"fan","location":"kitchen","value":"none","unit":"none"}}
+{"id":"challenge-029","command":"Play a song in the bedroom.","labels":{"intent":"device_control","action":"play","device":"speaker","location":"bedroom","value":"none","unit":"none"}}
+{"id":"challenge-030","command":"Stop music in the office.","labels":{"intent":"device_control","action":"pause","device":"speaker","location":"office","value":"none","unit":"none"}}
+{"id":"challenge-031","command":"Make the living room music volume 40 percent.","labels":{"intent":"device_control","action":"set_volume","device":"speaker","location":"living_room","value":"40","unit":"percent"}}
+{"id":"challenge-032","command":"Raise the bedroom shades.","labels":{"intent":"device_control","action":"open","device":"blinds","location":"bedroom","value":"none","unit":"none"}}
+{"id":"challenge-033","command":"Lower the kitchen blinds.","labels":{"intent":"device_control","action":"close","device":"blinds","location":"kitchen","value":"none","unit":"none"}}
+{"id":"challenge-034","command":"Secure the front entrance door.","labels":{"intent":"device_control","action":"lock","device":"door_lock","location":"front_door","value":"none","unit":"none"}}
+{"id":"challenge-035","command":"Turn on the fan.","labels":{"intent":"device_control","action":"turn_on","device":"fan","location":"unknown","value":"none","unit":"none"}}
+{"id":"challenge-036","command":"Start a song on the bathroom speaker.","labels":{"intent":"device_control","action":"play","device":"speaker","location":"bathroom","value":"none","unit":"none"}}
+{"id":"challenge-037","command":"Please pause whatever is playing in the kitchen.","labels":{"intent":"device_control","action":"pause","device":"speaker","location":"kitchen","value":"none","unit":"none"}}
+{"id":"challenge-038","command":"Dim the garage lamps to 20 percent.","labels":{"intent":"device_control","action":"set_brightness","device":"light","location":"garage","value":"20","unit":"percent"}}
+{"id":"challenge-039","command":"Set the bedroom AC to 68 degrees.","labels":{"intent":"device_control","action":"set_temperature","device":"thermostat","location":"bedroom","value":"68","unit":"fahrenheit"}}
+{"id":"challenge-040","command":"Close the garage shades.","labels":{"intent":"device_control","action":"close","device":"blinds","location":"garage","value":"none","unit":"none"}}
+{"id":"challenge-041","command":"Can you tell me the current time?","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-042","command":"Send an email to Taylor.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-043","command":"Remind me about the appointment tomorrow.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-044","command":"Order groceries for tonight.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-045","command":"Call a taxi to the airport.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-046","command":"Set the oven to 400 degrees.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-047","command":"Open the refrigerator.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-048","command":"Play the garage lights.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-049","command":"Set the front door to 50 percent.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
+{"id":"challenge-050","command":"Turn on the television.","labels":{"intent":"unsupported","action":"none","device":"none","location":"none","value":"none","unit":"none"}}
